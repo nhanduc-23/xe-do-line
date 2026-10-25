@@ -65,32 +65,7 @@ Hệ thống gồm ba khối chức năng chính:
 **Input – Processing – Output**
 <img width="548" height="355" alt="image" src="https://github.com/user-attachments/assets/33f7a22b-7807-4cc1-895b-27f7ec635b73" />
 
-```text
-        5 IR LINE SENSORS
-       S1  S2  S3  S4  S5
-                 |
-                 v
-        +----------------+
-        | ESP32 / Arduino|
-        |                |
-        | Sensor Reading |
-        | Line Detection |
-        | PID / Rule Logic|
-        | State Machine  |
-        +----------------+
-                 |
-                 v
-        +----------------+
-        |  L298N DRIVER  |
-        +----------------+
-             |       |
-             v       v
-          MOTOR A  MOTOR B
-             |       |
-             +---+---+
-                 |
-          ROBOT MOVEMENT
-```
+
 
 ### Nguyên lý hoạt động
 
@@ -245,7 +220,7 @@ Bộ PID xác định mức hiệu chỉnh tốc độ dựa trên sai lệch v�
 \[
 u(t)=K_pe(t)+K_i\int e(t)dt+K_d\frac{de(t)}{dt}
 \]
-
+   
 Trong đó:
 
 - **Kp:** Proportional Gain — hệ số tỉ lệ.
@@ -293,33 +268,7 @@ Chiến lược lựa chọn hướng thử nghiệm:
 
 Quy trình xử lý:
 
-```text
-LINE FOLLOWING
-      |
-      v
-LINE DETECTED?
-      |
-      +---- YES ---> CONTINUE
-      |
-      +---- NO
-              |
-              v
-       CONFIRM LINE LOSS
-              |
-              v
-       SEARCH NEARBY LINE
-              |
-              +---- FOUND ---> RESUME
-              |
-              +---- NOT FOUND
-                       |
-                       v
-                  TRY U-TURN
-                       |
-                       +-- FOUND --> RESUME
-                       |
-                       +-- FAILED --> STOP
-```
+<img width="435" height="641" alt="image" src="https://github.com/user-attachments/assets/96e048ec-d4fa-4e65-97bc-c6d9f8f681db" />
 
 Việc quay đầu được ước lượng bằng thời gian và khả năng phát hiện lại vạch. Hệ thống hiện chưa đo trực tiếp góc quay 180°.
 
