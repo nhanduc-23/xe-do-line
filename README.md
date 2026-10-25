@@ -63,6 +63,7 @@ Trong quá trình phát triển 3 tháng, dự án tập trung nghiên cứu:
 Hệ thống gồm ba khối chức năng chính:
 
 **Input – Processing – Output**
+<img width="548" height="355" alt="image" src="https://github.com/user-attachments/assets/33f7a22b-7807-4cc1-895b-27f7ec635b73" />
 
 ```text
         5 IR LINE SENSORS
