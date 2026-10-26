@@ -2,21 +2,15 @@
 
 ### Lộ trình thiết kế, chế tạo và phát triển trong 3 tuần
 
-Đồ án học phần **Nhập môn Cơ điện tử**: thiết kế và chế tạo xe bốn bánh sử dụng ESP32 DevKit V1, cảm biến dò line năm mắt, HC-SR04 và driver L298N. Hai chế độ **Auto–Manual** được lựa chọn qua ứng dụng Blynk trên điện thoại.
+Thiết kế và chế tạo xe bốn bánh sử dụng ESP32 DevKit V1, cảm biến dò line năm mắt, HC-SR04 và driver L298N. Hai chế độ **Auto–Manual** được lựa chọn qua ứng dụng Blynk trên điện thoại.
 
 **Thời gian triển khai:** 3 tuần, từ lắp ráp và thử động cơ đến dò line, tránh vật cản và điều khiển qua Blynk.
 
-README trình bày công việc theo từng tuần, các bước nâng cấp, đầu ra cần đạt và cách kiểm tra. Ngày được tính từ lúc bắt đầu dự án; kết quả thực tế được ghi sau khi thử xe.
+README trình bày công việc theo từng tuần, các bước nâng cấp, đầu ra cần đạt và cách kiểm tra. Ngày được tính từ lúc bắt đầu dự án, kết quả thực tế được ghi sau khi thử xe.
 
-**Phần cứng:** ESP32 · L298N · 4 động cơ DC · IR 5 mắt · HC-SR04.
+**Phần cứng:** ESP32 · L298N · 4 động cơ DC · IR 5 mắt · HC-SR04 · 2 cell pin Li-ion 18650 mắc nối tiếp — bộ pin 2S.
 
 **Giao diện:** Blynk qua Wi-Fi/Internet.
-
-**Tiến độ theo báo cáo:** Đã hoàn thiện phần cứng và thiết lập giao diện; tiếp tục kiểm thử và tối ưu điều khiển.
-
-**Cập nhật tài liệu:** 26/10/2026.
-
-> **Phiên bản mã nguồn:** Các tệp hiện có trong repository là các bản dò line nền tảng dùng MicroPython và Arduino C/C++. Firmware tích hợp HC-SR04/Blynk được mô tả trong báo cáo cần được bổ sung vào repo để đồng bộ với xe thực tế. Xem [Mã nguồn và phiên bản](#8-mã-nguồn-và-phiên-bản) trước khi chọn chương trình để nạp.
 
 ## 1. Mục tiêu và hai chế độ vận hành
 
@@ -33,7 +27,7 @@ Các mục tiêu kỹ thuật:
 - Giám sát trạng thái, khoảng cách và điều khiển hai chế độ qua Blynk.
 - Đánh giá chức năng bằng phép thử có điều kiện, thông số và kết quả ghi nhận rõ ràng.
 
-Xe hiện chưa có encoder đo vận tốc/quãng đường. Một HC-SR04 cố định chỉ quan sát vùng phía trước, chưa giám sát phía sau và hai bên.
+Một HC-SR04 cố định chỉ quan sát vùng phía trước, chưa giám sát phía sau và hai bên.
 
 ## 2. Lộ trình thực hiện và phát triển trong 3 tuần
 
@@ -41,7 +35,7 @@ Xe hiện chưa có encoder đo vận tốc/quãng đường. Một HC-SR04 cố
 |---|---|---|
 | **Tuần 1 · Ngày 1–7** | Lắp ráp cơ khí, đấu nối nguồn và điều khiển động cơ | Xe chạy đúng các lệnh tiến, lùi, trái, phải, dừng và thay đổi được mức PWM |
 | **Tuần 2 · Ngày 8–14** | Đọc IR, dò line cơ bản, nâng cấp PID và xử lý tình huống | Có phiên bản dò line để thử đường thẳng, cua, giao lộ và mất line |
-| **Tuần 3 · Ngày 15–21** | Bổ sung HC-SR04, Blynk, hai chế độ và kiểm thử tổng thể | Có chương trình tích hợp để kiểm chứng Auto–Manual; đồng bộ mã nguồn, báo cáo và minh chứng |
+| **Tuần 3 · Ngày 15–21** | Bổ sung HC-SR04, Blynk, hai chế độ và kiểm thử tổng thể | Hoàn thiện chương trình và chạy  xe ở hai chế độ: tự động và điều khiển từ xa.  |
 
 ### 2.1. Tuần 1 — Lắp ráp và làm chủ chuyển động
 
@@ -49,11 +43,11 @@ Xe hiện chưa có encoder đo vận tốc/quãng đường. Một HC-SR04 cố
 
 | Thời gian | Công việc thực hiện | Cách kiểm tra |
 |---|---|---|
-| Ngày 1 | Xác định chức năng hai chế độ; thống kê linh kiện, sơ đồ khối và bảng chân | Mỗi khối có chức năng, nguồn cấp và đường tín hiệu rõ ràng |
+| Ngày 1 | Xác định chức năng hai chế độ ,thống kê linh kiện, sơ đồ khối và bảng chân | Mỗi khối có chức năng, nguồn cấp và đường tín hiệu rõ ràng |
 | Ngày 2–3 | Lắp khung, bốn động cơ, bánh xe, pin, ESP32 và L298N; đi dây nguồn | Khung chắc, bánh không cạ, dây không vướng bánh; kiểm tra cực tính và điện áp |
-| Ngày 4–5 | Viết và thử riêng các lệnh tiến, lùi, trái, phải, dừng | Hai bánh cùng phía quay phối hợp đúng; gọi từng lệnh cho kết quả đúng hướng |
+| Ngày 4–5 | Viết và thử riêng các lệnh tiến, lùi, trái, phải, dừng | Hai bánh cùng phía quay phối hợp đúng, gọi từng lệnh cho kết quả đúng hướng |
 | Ngày 6 | Thêm PWM và thử nhiều mức điều khiển khi đặt xe xuống nền | Ghi mức PWM xe bắt đầu chuyển động, mức phù hợp để thử chậm và độ lệch hai bên |
-| Ngày 7 | Kiểm tra lại chuyển động, nguồn và mối nối; lưu phiên bản điều khiển cơ bản | Xe thực hiện đủ các lệnh, dừng được và không khởi động lại trong điều kiện đã thử |
+| Ngày 7 | Kiểm tra lại chuyển động, nguồn và mối nối, lưu phiên bản điều khiển cơ bản | Xe thực hiện đủ các lệnh, dừng được và không khởi động lại trong điều kiện đã thử |
 
 **Cách phát triển:** Thử một nhóm động cơ, sau đó thử cả hai nhóm; xác nhận chiều quay rồi mới thêm thay đổi PWM. Khi xe lệch hướng, kiểm tra cực tính, ma sát bánh và mức điều khiển hai bên trước khi chuyển sang thuật toán dò line.
 
@@ -71,17 +65,17 @@ Xe hiện chưa có encoder đo vận tốc/quãng đường. Một HC-SR04 cố
 
 | Thời gian | Công việc thực hiện | Cách kiểm tra |
 |---|---|---|
-| Ngày 8 | Gá thanh IR phía trước gầm, chỉnh độ cao/độ nhạy và in dữ liệu từng mắt | Đưa từng mắt lên nền trắng và vạch đen; xác nhận thứ tự trái → phải và quy ước tín hiệu |
+| Ngày 8 | Gá thanh IR phía trước gầm, chỉnh độ cao/độ nhạy và in dữ liệu từng mắt | Đưa từng mắt lên nền trắng và vạch đen, xác nhận thứ tự trái qua phải và quy ước tín hiệu |
 | Ngày 9 | Viết dò line theo điều kiện: vạch ở giữa, lệch trái, lệch phải và không thấy vạch | Xe hiệu chỉnh đúng hướng ở mức PWM thấp |
-| Ngày 10–11 | Tính sai lệch từ năm mắt; thêm PID và hiệu chỉnh từng tham số | Thử cùng sa hình; ghi dao động, khả năng bắt cua và số lần mất line |
-| Ngày 12 | Xác nhận giao lộ, chọn thứ tự ưu tiên rẽ và thử từng nhánh | Kiểm tra ngã ba/ngã rẽ; quan sát trường hợp nhận nhầm giao lộ |
-| Ngày 13 | Bổ sung tìm lại line và thử quay đầu khi cần | Chủ động đặt xe lệch khỏi vạch; kiểm tra cả tìm thấy và tìm thất bại |
+| Ngày 10–11 | Tính sai lệch từ năm mắt, thêm PID và hiệu chỉnh từng tham số | Thử cùng sa hình, ghi dao động, khả năng bắt cua và số lần mất line |
+| Ngày 12 | Xác nhận giao lộ, chọn thứ tự ưu tiên rẽ và thử từng nhánh | Kiểm tra ngã ba/ngã rẽ: quan sát trường hợp nhận nhầm giao lộ |
+| Ngày 13 | Bổ sung tìm lại line và thử quay đầu khi cần | Chủ động đặt xe lệch khỏi vạch: kiểm tra cả tìm thấy và tìm thất bại |
 | Ngày 14 | Chạy lại các tình huống, ghi cấu hình và lưu bản dò line nền tảng | Mã nguồn, thông số và minh chứng thuộc cùng một phiên bản |
 
 **Trình tự nâng cấp thuật toán:**
 
 1. Đọc cảm biến và in dữ liệu để xác nhận từng mắt hoạt động đúng.
-2. Điều khiển theo điều kiện: thấy vạch ở giữa thì tiến; vạch lệch bên nào thì hiệu chỉnh về bên đó.
+2. Điều khiển theo điều kiện: thấy vạch ở giữa thì tiến, vạch lệch bên nào thì hiệu chỉnh về bên đó.
 3. Gán trọng số cho năm mắt, tính sai lệch và thêm PID để điều chỉnh hai nhóm động cơ.
 4. Bổ sung xác nhận giao lộ và quy tắc chọn nhánh.
 5. Bổ sung khôi phục line, quay đầu và xử lý khi tìm kiếm thất bại theo phiên bản chương trình.
@@ -103,13 +97,13 @@ Khi xe lao ra ngoài ở cua, dao động hoặc phản ứng chậm, kiểm tra
 
 | Thời gian | Công việc thực hiện | Cách kiểm tra |
 |---|---|---|
-| Ngày 15 | Xác nhận nguồn/mức ECHO, lắp HC-SR04 và thử đọc khoảng cách riêng | So sánh với thước tại nhiều vị trí; ghi đơn vị, sai số và lần đo lỗi |
-| Ngày 16 | Ghép đo khoảng cách với dò line; xây dựng chuỗi tránh và tìm lại vạch | Thử vật cản trên sa hình ở mức PWM thấp; kiểm tra từng bước của chuỗi tránh |
-| Ngày 17 | Thiết lập thiết bị, datastream và giao diện Blynk; thử nhận/gửi dữ liệu | Khoảng cách, trạng thái và lệnh nhận tại ESP32 khớp giao diện |
-| Ngày 18 | Thêm Manual, bốn nút hướng, chỉnh PWM và tự dừng trước vật cản | Kiểm tra nhấn/thả; giữ nút Tiến khi có vật cản vẫn phải dừng |
-| Ngày 19 | Ghép chọn Auto–Manual, ưu tiên dừng và xử lý mất kết nối | Chỉ một chế độ điều khiển; đổi chế độ không phát lại lệnh hướng cũ |
+| Ngày 15 | lắp HC-SR04 và thử đọc khoảng cách riêng | So sánh với thước tại nhiều vị trí sau đó ghi đơn vị, sai số và lần đo lỗi |
+| Ngày 16 | Ghép đo khoảng cách với dò line: xây dựng chuỗi tránh và tìm lại vạch | Thử vật cản trên sa hình ở mức PWM thấp: kiểm tra từng bước của chuỗi tránh |
+| Ngày 17 | Thiết lập thiết bị, datastream và giao diện Blynk, thử nhận/gửi dữ liệu | Khoảng cách, trạng thái và lệnh nhận tại ESP32 khớp giao diện |
+| Ngày 18 | Thêm Manual, bốn nút hướng, chỉnh PWM và tự dừng trước vật cản | Kiểm tra nhấn/thả, giữ nút Tiến khi có vật cản vẫn phải dừng |
+| Ngày 19 | Ghép chọn Auto–Manual, ưu tiên dừng và xử lý mất kết nối | Chỉ một chế độ điều khiển, đổi chế độ không phát lại lệnh hướng cũ |
 | Ngày 20 | Chạy kiểm thử tổng thể, hiệu chỉnh và ghi kết quả | Thực hiện bảng kiểm ở mục 10, lưu điều kiện và minh chứng cho từng phép thử |
-| Ngày 21 | Hoàn thiện báo cáo, hướng dẫn vận hành và đồng bộ kho mã nguồn | Tài liệu, chương trình nạp trên xe và minh chứng cùng phiên bản; ghi rõ nội dung chưa đạt |
+| Ngày 21 | Hoàn thiện báo cáo, hướng dẫn vận hành và đồng bộ kho mã nguồn | Tài liệu, chương trình nạp trên xe và minh chứng cùng phiên bản, ghi rõ nội dung chưa đạt |
 
 **Các bước tích hợp chính:**
 
@@ -117,15 +111,14 @@ Khi xe lao ra ngoài ở cua, dao động hoặc phản ứng chậm, kiểm tra
 2. **Auto:** Kết hợp dò line với phát hiện vật cản, dừng, thực hiện chuỗi tránh và tìm lại vạch.
 3. **Manual:** Nhận lệnh Blynk; khi vật cản phía trước nằm trong khoảng cách dừng đã cài đặt, dừng và chặn tiến kể cả khi vẫn giữ nút Tiến.
 4. **Điều phối:** Dừng trước khi đổi chế độ, xóa lệnh cũ và ưu tiên yêu cầu dừng.
-5. **Kiểm chứng:** Thử mất kết nối, dữ liệu khoảng cách lỗi và tình huống không tìm lại được line; điều chỉnh chương trình theo kết quả.
+5. **Kiểm chứng:** Thử mất kết nối, dữ liệu khoảng cách lỗi và tình huống không tìm lại được line, điều chỉnh chương trình theo kết quả.
 
 **Đầu ra cuối tuần:**
 
 - Chương trình tích hợp đúng phiên bản và bảng cấu hình Blynk.
 - Kết quả thử Auto–Manual, kèm thông số, ảnh/video và các vấn đề chưa xử lý.
-- Báo cáo, README và mã nguồn phản ánh đúng cấu hình xe thực tế.
 
-**Tiêu chí hoàn thành:** Các chức năng được kiểm chứng bằng phép thử có kết quả ghi nhận; những mục chưa đạt tiếp tục nằm trong danh sách hoàn thiện. Chưa dùng việc có giao diện hoặc đã đấu nối cảm biến làm bằng chứng chức năng tích hợp hoạt động ổn định.
+**Tiêu chí hoàn thành:** Các chức năng được kiểm chứng bằng phép thử có kết quả ghi nhận.hững mục chưa đạt tiếp tục nằm trong danh sách hoàn thiện. Chưa dùng việc có giao diện hoặc đã đấu nối cảm biến làm bằng chứng chức năng tích hợp hoạt động ổn định.
 
 Công cụ sử dụng trong quá trình phát triển gồm MicroPython/Thonny, Arduino IDE cho các bản C/C++, Serial Monitor và GitHub. Các phiên bản chạy được cần được lưu trước mỗi lần nâng cấp để có thể đối chiếu hoặc khôi phục.
 
