@@ -124,7 +124,7 @@ Công cụ sử dụng trong quá trình phát triển gồm MicroPython/Thonny,
 
 ## 3. Kiến trúc hệ thống
 <img width="1450" height="952" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/2c1bda6a-8198-4079-9f19-f98bcb4bdc12" />
-
+       Hình 3.1:sơ đồ tổng quan hệ thống
 
 ESP32 đọc cảm biến và tiếp nhận dữ liệu Blynk vào các biến lệnh. Khối điều phối xét chế độ và điều kiện bảo vệ trước khi xuất lệnh cuối cùng cho L298N. Khoảng cách và trạng thái xử lý được gửi về ứng dụng để giám sát.
 
