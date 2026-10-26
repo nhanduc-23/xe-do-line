@@ -237,7 +237,7 @@ ESP32 phát TRIG và đo **độ rộng xung ECHO** để xác định khoảng 
 Các yêu cầu này cần được kiểm chứng với firmware tích hợp. Nút Dừng khẩn cấp Blynk gửi lệnh qua mạng, công tắc nguồn tại xe đóng/ngắt nguồn vật lý.
 
 
-## 10. Kiểm chứng chức năng
+## 7. Kiểm chứng chức năng
 
 Kế hoạch theo báo cáo gồm 12 nhóm chức năng. Ghi điều kiện, thông số đặt, kết quả thực tế và ảnh/log/video cho từng phép thử.
 
@@ -256,7 +256,7 @@ Kế hoạch theo báo cáo gồm 12 nhóm chức năng. Ghi điều kiện, th�
 | 11. Dừng khẩn cấp Blynk | Có tác dụng hai chế độ, hủy dừng không tự chạy lại |
 | 12. Mất kết nối và kết nối lại | Dừng theo cơ chế phát hiện/hết hạn lệnh, khôi phục kết nối chờ lệnh mới |
 
-## 11. Giới hạn và hướng hoàn thiện
+## 8. Giới hạn và hướng hoàn thiện
 
 | Giới hạn hiện tại | Hướng hoàn thiện |
 |---|---|
@@ -264,10 +264,10 @@ Kế hoạch theo báo cáo gồm 12 nhóm chức năng. Ghi điều kiện, th�
 | Chuỗi tránh chịu ảnh hưởng trượt bánh và mặt đường | Hiệu chỉnh theo sa hình, thêm encoder/IMU khi cần đo chuyển động |
 | Dừng Blynk phụ thuộc mạng | Kiểm chứng bảo vệ cục bộ, hết hạn lệnh và hành vi kết nối lại |
 
-## 12. Đầu ra của lộ trình và hướng tiếp tục
+## 9. Đầu ra của lộ trình và hướng tiếp tục
 
 Sau 3 tuần, bộ hồ sơ dự án cần gồm cấu hình phần cứng, sơ đồ đấu nối, các phiên bản chương trình, cấu hình Blynk, hướng dẫn vận hành và kết quả thử nghiệm. Mục tiêu là phát triển từng bước từ xe điều khiển động cơ cơ bản đến xe dò line có tránh vật cản và điều khiển từ xa.
-Công việc tiếp tục theo chu trình **Thiết kế → Triển khai → Thử nghiệm → Đánh giá → Cải tiến** (*Design → Implement → Test → Evaluate → Improve*). Các hướng phát triển sau 3 tuần được trình bày tại mục 11.
+Công việc tiếp tục theo chu trình **Thiết kế → Triển khai → Thử nghiệm → Đánh giá → Cải tiến** (*Design → Implement → Test → Evaluate → Improve*). Các hướng phát triển sau 3 tuần được trình bày tại mục 8.
 
 ## Tài liệu kỹ thuật tham khảo
 
