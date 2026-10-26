@@ -16,8 +16,8 @@ README trình bày công việc theo từng tuần, các bước nâng cấp, đ
 
 | Chế độ | Chức năng | Xử lý vật cản phía trước |
 |---|---|---|
-| **Auto — chế độ 1** | Bám vạch đen trên nền sáng, xử lý giao lộ và tìm lại line | Tạm dừng dò line, thực hiện chuỗi tránh đã lập trình, tìm lại vạch để tiếp tục |
-| **Manual — chế độ 2** | Nhận lệnh Tiến, Lùi, Trái, Phải và mức PWM từ Blynk | Ưu tiên dừng, chặn tiến khi khoảng cách không bảo đảm điều kiện chạy |
+| **Auto  (chế độ 1)** | Bám vạch đen trên nền sáng, xử lý giao lộ và tìm lại line | Tạm dừng dò line, thực hiện chuỗi tránh đã lập trình, tìm lại vạch để tiếp tục |
+| **Manual  (chế độ 2)** | Nhận lệnh Tiến, Lùi, Trái, Phải và mức PWM từ Blynk | Ưu tiên dừng, chặn tiến khi khoảng cách không bảo đảm điều kiện chạy |
 
 Các mục tiêu kỹ thuật:
 
@@ -123,18 +123,8 @@ Khi xe lao ra ngoài ở cua, dao động hoặc phản ứng chậm, kiểm tra
 Công cụ sử dụng trong quá trình phát triển gồm MicroPython/Thonny, Arduino IDE cho các bản C/C++, Serial Monitor và GitHub. Các phiên bản chạy được cần được lưu trước mỗi lần nâng cấp để có thể đối chiếu hoặc khôi phục.
 
 ## 3. Kiến trúc hệ thống
+<img width="1450" height="952" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/2c1bda6a-8198-4079-9f19-f98bcb4bdc12" />
 
-```mermaid
-flowchart TD
-    IR["Thanh IR 5 mắt"] -->|"SS1–SS5"| ESP["ESP32 DevKit V1"]
-    HC["HC-SR04 phía trước"] -->|"ECHO phù hợp mức GPIO"| ESP
-    ESP -->|"TRIG"| HC
-    APP["Ứng dụng Blynk"] <--> CLOUD["Blynk.Cloud"]
-    CLOUD <-->|"Wi-Fi / Internet"| ESP
-    ESP -->|"IN1–IN4 và PWM ENA/ENB"| DRIVER["Driver L298N"]
-    DRIVER --> LEFT["2 động cơ bên trái"]
-    DRIVER --> RIGHT["2 động cơ bên phải"]
-```
 
 ESP32 đọc cảm biến và tiếp nhận dữ liệu Blynk vào các biến lệnh. Khối điều phối xét chế độ và điều kiện bảo vệ trước khi xuất lệnh cuối cùng cho L298N. Khoảng cách và trạng thái xử lý được gửi về ứng dụng để giám sát.
 
