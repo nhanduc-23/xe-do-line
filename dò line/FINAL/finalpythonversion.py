@@ -1,7 +1,5 @@
 """Xe dò line ESP32 dùng MicroPython và điều khiển qua Blynk Cloud.
-Sửa wifiName, wifiPassword và blynkToken trước khi nạp vào ESP32.
-Tên biến và hàm viết bằng tiếng Anh; phần giải thích viết bằng tiếng Việt.
-"""
+
 import time
 import socket
 import struct
